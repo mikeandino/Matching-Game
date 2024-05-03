@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+.tile{
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+
+    perspective: 1000px;
+}
+
+.tile-inner {
+    /*border: 10px solid #c6b7a8;*/
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.clicked .tile-inner {
+    transform: rotateX(180deg);
+} 
+
+.tile-front, .tile-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.tile-front {
+    background-color: burlywood;
+    color: black;
+
+}
+
+.tile-front:hover, .active > .tile-inner > .tile-front {
+    background-color: antiquewhite;
+}
+
+.tile-back {
+    background: antiquewhite;
+    color: black;
+    transform: rotateX(180deg);
+}
+
+.tile-back:hover, .active > .tile-inner > .tile-back {
+    background-color: burlywood;
+}
