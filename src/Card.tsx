@@ -1,21 +1,22 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import './Card.css'
 
 type CardProp = {
     num: number;
+    flipped: boolean;
 };
 
-function Card({num}: CardProp) {
+function Card({num, flipped}: CardProp) {
   
-    const [clicked, setClicked] = useState(false);
 
-    const isClicked = () => {
-        setClicked(!clicked);
-    }
+
+    useEffect(() =>{
+
+    }, [flipped])
 
     return (
       <>
-        <div className={clicked ? 'tile clicked' : 'tile'} onClick={isClicked}>
+        <div className={flipped ? 'tile clicked' : 'tile'} >
             <div className="tile-inner">
                 <div className="tile-front">
                     <p>?</p>
