@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
-import './Card.css'
+import '../styles/Card.css'
 
 type CardProp = {
     num: number;
     flipped: boolean;
+    matched: boolean;
 };
 
-function Card({num, flipped}: CardProp) {
+function Card({num, flipped, matched}: CardProp) {
   
 
 
@@ -21,8 +22,8 @@ function Card({num, flipped}: CardProp) {
                 <div className="tile-front">
                     <p>?</p>
                 </div>
-                <div className="tile-back">
-                    <p>{num}</p>
+                <div className={ matched ? "tile-back matched" : "tile-back"}>
+                    <p>{(num !== -1) ? num : "X"}</p>
                 </div>
             </div>
         </div>
