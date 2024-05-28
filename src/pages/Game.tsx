@@ -1,6 +1,7 @@
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import Board from "./Board";
 import { Modal, Tooltip } from "bootstrap";
+import "../styles/Game.css";
 import "../../node_modules/bootstrap/scss/bootstrap.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -9,14 +10,18 @@ function Game() {
   const [start, setStart] = useState(false);
   const [rows, setRows] = useState(0);
   const [cols, setCols] = useState(0);
-  const settingsRef = useRef<HTMLDivElement | null>(null);
+  const settingsRef = useRef<HTMLDivElement>();
   const settingsModal = useRef<Modal | null>(null);
   const tooltipRef = useRef<string|Element>("");
-  const winRef = useRef<HTMLDivElement | null>(null);
+  const winRef = useRef<string|Element>(null);
   const winModal = useRef<Modal | null>(null);
-  const loseRef = useRef<HTMLDivElement | null>(null);
+  const loseRef = useRef<string|Element>(null);
   const loseModal = useRef<Modal | null>(null);
 
+  useEffect(() => {
+    handleModal(true);
+  }, [])
+  
   const handleModal = (show: boolean) => {
     if (settingsRef.current) {
       if (!settingsModal.current) {
@@ -38,16 +43,6 @@ function Game() {
     }
   };
   
-  useEffect(() => {
-    handleModal(true);
-    return () => {
-      if (settingsModal.current) {
-        settingsModal.current.dispose();
-        settingsModal.current = null;
-      }
-    }
-  }, [])
-
 
   function clickstart(event: MouseEvent<HTMLButtonElement, MouseEvent>){
     if((rows > 1) && (rows <= 9) && (cols > 1) && (cols <= 9)){
@@ -104,11 +99,11 @@ function Game() {
             </div>
           </div>
         </div>
-        {!start ? (
-            <div />
-            )
-            : (
+        {start && 
+            (
+              <div className="container-fluid vh-100 d-flex justify-content-center align-items-center">
                 <Board rows={rows} cols={cols} gamewin={gamewin} gamelose={gamelose}/>
+              </div>
             )
         }
         <div className="modal fade" id="win"  tabIndex={-1} role="dialog" ref={winRef} aria-labelledby="winLabel" aria-hidden="true" >

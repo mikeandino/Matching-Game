@@ -4,8 +4,12 @@ body {
 
 .tile{
     background-color: transparent;
-    width: 50px;
-    height: 50px;
+    container-type: size;
+    /*width: 50px;
+    height: 50px;*/
+    width: 100%;
+    height: 100%;
+    font-size: 2rem;
     perspective: 1000px;
 }
 
@@ -26,13 +30,14 @@ body {
 
 .tile-front, .tile-back {
     position: absolute;
+    display: flex;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 50cqi;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .tile-front {
