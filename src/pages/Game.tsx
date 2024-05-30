@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Board from "./Board";
 import { Modal, Tooltip } from "bootstrap";
 import "../styles/Game.css";
@@ -10,12 +10,13 @@ function Game() {
   const [start, setStart] = useState(false);
   const [rows, setRows] = useState(0);
   const [cols, setCols] = useState(0);
-  const settingsRef = useRef<HTMLDivElement>();
+  const settingsRef = useRef<HTMLDivElement | null>(null);
   const settingsModal = useRef<Modal | null>(null);
-  const tooltipRef = useRef<string|Element>("");
-  const winRef = useRef<string|Element>(null);
+  const tooltipRef = useRef<HTMLDivElement | null>(null);
+  const tooltip = useRef<Tooltip | null>(null);
+  const winRef = useRef<HTMLDivElement | null>(null);
   const winModal = useRef<Modal | null>(null);
-  const loseRef = useRef<string|Element>(null);
+  const loseRef = useRef<HTMLDivElement | null>(null);
   const loseModal = useRef<Modal | null>(null);
 
   useEffect(() => {
@@ -26,16 +27,16 @@ function Game() {
     if (settingsRef.current) {
       if (!settingsModal.current) {
         settingsModal.current = new Modal(settingsRef.current,{backdrop:"static", keyboard:false});
-      }
-    
-      if (show) {
-        const tooltip = new Tooltip(tooltipRef.current, {
+        tooltip.current = new Tooltip(tooltipRef.current!, {
           title: "<p>Enter a number between 2 and 9 to the rows and columns of tiles to match.</p> <p>If the number of tiles is odd a special <b>\"X\"</b> tile will appear that when flipped, ends the game.</p>", 
           placement: 'right', 
           html: true,
           container: "body",
           trigger: 'hover focus'
         });
+      }
+    
+      if (show) {
         settingsModal.current.show();
       } else {
         settingsModal.current.hide();
@@ -44,7 +45,7 @@ function Game() {
   };
   
 
-  function clickstart(event: MouseEvent<HTMLButtonElement, MouseEvent>){
+  function clickstart(event: React.MouseEvent<HTMLButtonElement> ){
     if((rows > 1) && (rows <= 9) && (cols > 1) && (cols <= 9)){
       event.preventDefault();
       handleModal(false);
@@ -54,13 +55,13 @@ function Game() {
 
   function gamewin(){
     console.log("victory");
-    winModal.current = new Modal(winRef.current,{backdrop:"static", keyboard:false});
+    winModal.current = new Modal(winRef.current!,{backdrop:"static", keyboard:false});
     winModal.current.show();
   }
 
   function gamelose(){
     console.log("lose");
-    loseModal.current = new Modal(loseRef.current,{backdrop:"static", keyboard:false});
+    loseModal.current = new Modal(loseRef.current!,{backdrop:"static", keyboard:false});
     loseModal.current.show();
   }
 
@@ -93,7 +94,7 @@ function Game() {
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button type="submit" className="btn btn-primary" onClick={(e) => clickstart(e)} >Start Game!</button>
+                  <button type="submit" className="btn btn-primary" onClick={clickstart} >Start Game!</button>
                 </div>
               </form>
             </div>
