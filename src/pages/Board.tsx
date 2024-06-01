@@ -23,18 +23,15 @@ type Savedcard = {
 }
 
 function Board({ rows, cols, gamewin, gamelose }: BoardProps) {
-    // let width, height;
-    // width = height = 50;
     const total: number = (!((rows * cols) % 2) ? (rows * cols) / 2 : ((rows * cols) / 2 - .5));
     const [cardgrid, setCardgird] = useState<Cardlog[][]>([]);
     const [currentcard, setCurrentcard] = useState<Savedcard>({ num: -1, isflipped: false, x: -1, y: -1 });
-    const [matching, setMatching] = useState(false);
-    const [timer, setTimer] = useState(false);
+    const [matching, setMatching] = useState<boolean>(false);
+    const [timer, setTimer] = useState<boolean>(false);
     const [width, setWidth] = useState<number>(75); 
     const [height, setHeight] = useState<number>(75);
     const [gap, setGap] = useState<number>(5);
-    const matches = useRef(0);
-    //const [victory, setVictory] = useState(false);
+    const matches = useRef<number>(0);
 
     useEffect(() => {
         setsize();

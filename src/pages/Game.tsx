@@ -7,9 +7,9 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 
 function Game() {
-  const [start, setStart] = useState(false);
-  const [rows, setRows] = useState(0);
-  const [cols, setCols] = useState(0);
+  const [start, setStart] = useState<boolean>(false);
+  const [rows, setRows] = useState<number>(0);
+  const [cols, setCols] = useState<number>(0);
   const settingsRef = useRef<HTMLDivElement | null>(null);
   const settingsModal = useRef<Modal | null>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);

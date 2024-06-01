@@ -43,7 +43,6 @@ body {
 .tile-front {
     background-color: burlywood;
     color: black;
-
 }
 
 .tile-front:hover, .active > .tile-inner > .tile-front {
@@ -58,4 +57,13 @@ body {
 
 [class=tile-back]:hover:hover, .active > .tile-inner > .tile-back {
     background-color: burlywood;
+}
+
+p {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
